@@ -1,0 +1,13 @@
+.tic-tac-toe-route {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    & > .game-area {
+        padding: 16px;
+        width: 100%;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        background-color: beige;
+    }
+}
