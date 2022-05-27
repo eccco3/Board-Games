@@ -1,0 +1,19 @@
+.menu-route {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    & > .games {
+        width: 720px;
+        height: 720px;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+        & > a {
+            font-size: 16px;
+            height: 50px;
+        }
+    }
+}
