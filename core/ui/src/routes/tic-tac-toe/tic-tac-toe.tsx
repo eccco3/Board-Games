@@ -6,26 +6,43 @@ import './tic-tac-toe.scss';
 import { Board } from '../../common/board/board';
 import { GameLayout } from '../../common/game-layout/game-layout';
 
+type State = {
+    board: (String | null)[][],
+    turn: Number,
+}
+
 export const TicTacToeRoute = () => {
-    const [cells, setCells] = useState(
-        new Array(3).fill(0).map((row) => new Array(3).fill({ content: null })),
-    );
-    const [response, setResponse] = useState<any>(null);
+    const [state, setState] = useState<State>({
+        board: new Array(3).fill(null).map((row) => new Array(3).fill(null)),
+        turn: 1,
+    });
+    const [response, setResponse] = useState<State | null>(null);
     useEffect(() => {
         if (response) {
-            setCells(response);
+            setState(response);
         }
     }, [response]);
 
-    const getAIMove = () => {
+    const playerMove = (cell: [0 | 1 | 2, 0 | 1 | 2]): void => {
         axios
-            .post('http://localhost:8000/api/tictactoe/ai', cells)
+            .post('http://localhost:8000/api/tictactoe/move', {...state, cell})
+            .then((res) => {
+                console.log("response", res);
+                setResponse({board: res.data, turn: -state.turn});
+            })
+            .catch((err) => {
+                console.log('Error from playerMove', err);
+            });
+    }
+    const aiMove = (): void => {
+        axios
+            .post('http://localhost:8000/api/tictactoe/ai', state)
             .then((res) => {
                 console.log("response", res);
                 setResponse(res.data);
             })
             .catch((err) => {
-                console.log('Error from getAiMove', err);
+                console.log('Error from aiMove', err);
             });
     };
 
@@ -34,10 +51,10 @@ export const TicTacToeRoute = () => {
             <GameLayout />
             <div className="game-area">
                 <Board
-                    cells={cells}
+                    cells={state.board}
                     length={3}
-                    onClick={(i, j) => {
-                        getAIMove();
+                    onClick={(cell: [0 | 1 | 2, 0 | 1 | 2]): void => {
+                        playerMove(cell);
                     }}
                 />
             </div>
