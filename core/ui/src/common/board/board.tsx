@@ -16,10 +16,10 @@ export const Board = ({cells, length, onClick}) => {
                 <div
                     className="cell"
                     key={"row " + i + "col " + j}
-                    onClick={() => onClick(i, j)}
+                    onClick={() => onClick([i, j])}
                 >
                     <div className="content">
-                        {col.content}
+                        {col}
                     </div>
                 </div>
             )))}

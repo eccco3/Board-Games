@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
-const tictactoe = require('./core/apis/tic-tac-toe/tic-tac-toe-api');
+import { router as tictactoe } from './core/apis/tic-tac-toe/tic-tac-toe-api';
 
 const PORT = 8000;
 const server = express();
@@ -11,7 +11,7 @@ server.use(cors());
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
-server.use('/api/tictactoe', tictactoe.router);
+server.use('/api/tictactoe', tictactoe);
 
 server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
