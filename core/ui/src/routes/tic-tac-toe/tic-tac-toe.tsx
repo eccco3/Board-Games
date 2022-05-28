@@ -7,13 +7,13 @@ import { Board } from '../../common/board/board';
 import { GameLayout } from '../../common/game-layout/game-layout';
 
 export const TicTacToeRoute = () => {
-    const [cells, setBoard] = useState(
-        new Array(3).fill(0).map((row) => new Array(3).fill({ content: 'X' })),
+    const [cells, setCells] = useState(
+        new Array(3).fill(0).map((row) => new Array(3).fill({ content: null })),
     );
     const [response, setResponse] = useState<any>(null);
     useEffect(() => {
         if (response) {
-            setBoard(response?.data?.board);
+            setCells(response);
         }
     }, [response]);
 
@@ -21,6 +21,7 @@ export const TicTacToeRoute = () => {
         axios
             .post('http://localhost:8000/api/tictactoe/ai', cells)
             .then((res) => {
+                console.log("response", res);
                 setResponse(res.data);
             })
             .catch((err) => {
@@ -33,7 +34,7 @@ export const TicTacToeRoute = () => {
             <GameLayout />
             <div className="game-area">
                 <Board
-                    cells
+                    cells={cells}
                     length={3}
                     onClick={(i, j) => {
                         getAIMove();

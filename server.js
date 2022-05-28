@@ -1,12 +1,20 @@
 const express = require('express');
 const cors = require('cors');
-// const morgan = require('morgan');
 const bodyParser = require('body-parser');
+
 const tictactoe = require('./core/apis/tic-tac-toe/tic-tac-toe-api');
 
 const PORT = 8000;
 const server = express();
+
 server.use(cors());
+server.use(bodyParser.json());
+server.use(bodyParser.urlencoded({ extended: true }));
+
+server.use('/api/tictactoe', tictactoe.router);
+
+server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
 // server.use(morgan('combined'));
 // server.use(function (err, req, res, next) {
 //     res.status(err.status || 500);
@@ -14,9 +22,3 @@ server.use(cors());
 //     console.log(err);
 //     next();
 // });
-server.use(bodyParser.json());
-server.use(bodyParser.urlencoded({ extended: true }));
-server.use('/api/tictactoe', tictactoe.router);
-server.get('/', (req, res) => res.send('Hello world!'));
-
-server.listen(PORT, () => console.log(`Server running on port ${PORT}`));
