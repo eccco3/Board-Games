@@ -6,7 +6,7 @@ export type Cell = [ColIndex, ColIndex];
 export type Board = [
     [TicTacToePiece, TicTacToePiece, TicTacToePiece],
     [TicTacToePiece, TicTacToePiece, TicTacToePiece],
-    [TicTacToePiece, TicTacToePiece, TicTacToePiece]
+    [TicTacToePiece, TicTacToePiece, TicTacToePiece],
 ];
 
 const isColIndex = (num: Number): num is ColIndex => num > 0;
@@ -19,17 +19,16 @@ export const aiMove = ({
     player: Player;
 }): Board => {
     const newBoard = board;
-    const blocks = mustBlock({board, player});
+    const blocks = mustBlock({ board, player });
+    console.log("aiMove", blocks, newBoard);
     if (blocks.length > 0) {
-        newBoard[blocks[0][0]][blocks[0][1]] = player === 1 ? 'O' : 'X';
+        newBoard[blocks[0][0]][blocks[0][1]] = player === 1 ? 'X' : 'O';
         return newBoard;
-    }
-    else {
-        let index = -1;
+    } else {
         for (let i = 0; i < 3; i++) {
             for (let j = 0; j < 3; j++) {
                 if (newBoard[i][j] === null) {
-                    newBoard[i][j] = player === 1 ? 'O' : 'X';
+                    newBoard[i][j] = player === 1 ? 'X' : 'O';
                     return newBoard;
                 }
             }
@@ -37,20 +36,21 @@ export const aiMove = ({
     }
 };
 export const playerMove = ({
-    board, 
-    player, 
+    board,
+    player,
     cell,
 }: {
-    board: Board, 
-    player: Player, 
-    cell: Cell
-}): Promise<Board> => new Promise((res, rej) => {
-    if (board[cell[0]][cell[1]] === null) {
-        const newBoard = board;
-        newBoard[cell[0]][cell[1]] = player === 1 ? 'X' : 'O';
-        res(newBoard);
-    }
-});
+    board: Board;
+    player: Player;
+    cell: Cell;
+}): Promise<Board> =>
+    new Promise((res, rej) => {
+        if (board[cell[0]][cell[1]] === null) {
+            const newBoard = board;
+            newBoard[cell[0]][cell[1]] = player === 1 ? 'X' : 'O';
+            res(newBoard);
+        }
+    });
 
 const mustBlock = ({
     board,
@@ -59,9 +59,7 @@ const mustBlock = ({
     board: Board;
     player: Player;
 }): Cell[] => {
-    const mustBlockArr = (
-        arr: BoardCol,
-    ): ColIndex | false => {
+    const mustBlockArr = (arr: BoardCol): ColIndex | false => { //todo: fix horizontal failure
         if (
             arr.filter((piece) => piece === (player === 1 ? 'O' : 'X'))
                 .length === 2 &&
@@ -74,11 +72,11 @@ const mustBlock = ({
     };
     const rowIndices = board.reduce((res, row, i) => {
         const j = mustBlockArr(row);
-        if (typeof j === "number") {
+        if (typeof j === 'number') {
             return [...res, [i, j]];
         }
         return res;
     }, []);
-    //implement for cols and diags
+    //todo: implement for cols and diags
     return rowIndices;
 };

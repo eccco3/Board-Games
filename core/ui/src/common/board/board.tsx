@@ -1,9 +1,9 @@
 import React from 'react';
 
-import "./board.scss";
+import './board.scss';
 
-export const Board = ({cells, length, onClick}) => {
-    console.log("cells", cells);
+export const Board = ({ cells, length, onClick }) => {
+    console.log('cells', cells);
     return (
         <div
             className="board"
@@ -12,17 +12,17 @@ export const Board = ({cells, length, onClick}) => {
                 gridTemplateRows: `repeat(${length}, 1fr)`,
             }}
         >
-            {cells.map((row, i) => row.map((col, j) => (
-                <div
-                    className="cell"
-                    key={"row " + i + "col " + j}
-                    onClick={() => onClick([i, j])}
-                >
-                    <div className="content">
-                        {col}
+            {cells.map((row, i) =>
+                row.map((col, j) => (
+                    <div
+                        className="cell"
+                        key={'row ' + i + 'col ' + j}
+                        onClick={() => onClick([i, j])}
+                    >
+                        <div className="content">{col}</div>
                     </div>
-                </div>
-            )))}
+                )),
+            )}
         </div>
     );
 };

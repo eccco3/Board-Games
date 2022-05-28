@@ -14,7 +14,6 @@ export const router = express.Router();
 // @access Public
 router.post('/ai', (req, res) => {
     const aiMoved = aiMove({ board: req.body.board, player: req.body.turn });
-
     res.json(aiMoved);
 });
 
