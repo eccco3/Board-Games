@@ -1,7 +1,5 @@
-const aiMove = async (body) => {
-    const newBoard = body.board;
-    newBoard.splice(0, 1, ['X', null, null]);
-    return newBoard;
-}
+const aiMove = (board) => {
+    return board;
+};
 
-module.exports = { aiMove }
+module.exports = { aiMove };

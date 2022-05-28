@@ -5,19 +5,17 @@ const service = require('./service/tic-tac-toe-service');
 // @description send board state and receive ai move
 // @access Public
 router.post('/ai', (req, res) => {
-  const body = req.body;
-  const aiMoved = service.aiMove(body);
-  res.json(aiMoved);
+    console.log(JSON.stringify(req.body));
+    const aiMoved = service.aiMove(req.body.board);
+
+    res.json(aiMoved);
 });
 
 // @route GET api/tictactoe/test
 // @description send board state and receive ai move
 // @access Public
 router.get('/test', (req, res) => {
-  res.send('testing');
+    res.send('testing');
 });
-
-
-
 
 module.exports = { router };

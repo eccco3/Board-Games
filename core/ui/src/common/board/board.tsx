@@ -3,7 +3,7 @@ import React from 'react';
 import "./board.scss";
 
 export const Board = ({cells, length, onClick}) => {
-    
+    console.log("cells", cells);
     return (
         <div
             className="board"
