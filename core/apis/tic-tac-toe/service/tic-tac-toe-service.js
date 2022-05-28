@@ -1,5 +1,7 @@
-const aiMove = (board) => {
-    return board;
+
+
+const aiMove = ({ cells, player }) => {
+    return cells;
 };
 
 module.exports = { aiMove };
