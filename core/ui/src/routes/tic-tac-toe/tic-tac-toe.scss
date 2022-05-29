@@ -1,9 +1,12 @@
 .tic-tac-toe-route {
+    width: 100%;
+    height: 100%;
     display: flex;
     flex-flow: column;
     align-items: center;
     & > .game-area {
         padding: 16px;
+        min-height: 100vh;
         width: 100%;
         display: flex;
         flex-flow: column;
