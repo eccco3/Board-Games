@@ -3,8 +3,8 @@ import axios from 'axios';
 
 import './tic-tac-toe.scss';
 
-import { Board } from '../../common/board/board';
-import { GameHeader } from '../../common/game-header/game-header';
+import { Board } from '../common/board/board';
+import { GameHeader } from '../common/game-header/game-header';
 
 type State = {
     board: (String | null)[][];
