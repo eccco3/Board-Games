@@ -4,7 +4,7 @@ import axios from 'axios';
 import './tic-tac-toe.scss';
 
 import { Board } from '../../common/board/board';
-import { GameHeader } from '../../common/game-layout/game-header';
+import { GameHeader } from '../../common/game-header/game-header';
 
 type State = {
     board: (String | null)[][];
@@ -55,7 +55,7 @@ export const TicTacToeRoute = () => {
 
     return (
         <div className="tic-tac-toe-route">
-            <GameHeader />
+            <GameHeader/>
             <div className="game-area">
                 <Board
                     cells={state.board}

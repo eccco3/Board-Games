@@ -1,10 +1,10 @@
 .board {
-    padding: 16px;
-    height: 100%;
-    width: 100%;
+    padding: 1%;
+    height: 80vmin;
+    width: 80vmin;
     display: grid;
     background-color: brown;
-    gap: 8px;
+    gap: 2%;
     border-radius: 5px;
     .cell {
         display: flex;
